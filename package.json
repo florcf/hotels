@@ -1,0 +1,20 @@
+{
+  "name": "U05P01_DelCastilloFleitas_Florencia",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/florcf/hotels.git"
+  },
+  "keywords": [],
+  "author": "Florencia Del Castillo Fleitas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/florcf/hotels/issues"
+  },
+  "homepage": "https://github.com/florcf/hotels#readme"
+}
