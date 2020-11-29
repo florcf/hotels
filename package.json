@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "install": "npm install eslint --save-dev"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/florcf/hotels/issues"
   },
-  "homepage": "https://github.com/florcf/hotels#readme"
+  "homepage": "https://github.com/florcf/hotels#readme",
+  "devDependencies": {
+    "eslint": "^7.14.0"
+  }
 }
