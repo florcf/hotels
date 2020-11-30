@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "install": "npm install eslint --save-dev"
+    "install": "npm install --save-dev eslint jsdoc",
+    "lint": "eslint .",
+    "lintfix": "eslint --fix ."
   },
   "repository": {
     "type": "git",
@@ -19,6 +21,10 @@
   "homepage": "https://github.com/florcf/hotels#readme",
   "devDependencies": {
     "eslint": "^7.14.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
     "jsdoc": "^3.6.6"
   }
 }
