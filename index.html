@@ -13,10 +13,35 @@
         <label for="date">Check-in Date</label>
         <input type="date" name="date" id="">
         <label for="nights">Nights</label>
-        <select name="nights" id=""></select>
+        <select name="nights" id="nights-select"></select>
         <label for="rooms">Rooms & Guests</label>
         <input type="text" name="rooms" id="">
+        <div id="new-room"></div>
         <input type="button" value="Search">
     </form>
+
+    <template id="room">
+        <div>
+            <h3><span id="room-number">1</span> Habitación</h3>
+            <label for="adults">Adultos</label>
+            <select name="adults" id="">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+            <label for="children">Niños</label>
+            <select name="children" id="">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+        </div>
+        <div id="add-room">
+            <p>ADD ROOM</p>
+        </div>
+    </template>
 </body>
 </html>
