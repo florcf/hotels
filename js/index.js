@@ -8,7 +8,11 @@ const formElements = [...document.forms[0].children];
 function setDate () {
     const dateInput = formElements[3];
     const date = new Date();
-    const today = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    const day = date.getDate();
+    const dayFormat = (day < 10) ? `0${day}` : day;
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const today = `${year}-${month}-${dayFormat}`;
     dateInput.setAttribute('min', today);
     dateInput.value = today;
 }
