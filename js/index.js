@@ -12,13 +12,9 @@ $('#room-input').on('shown.bs.popover', function () {
     const addRoomBtn = document.getElementById('add-room');
     addRoomBtn.addEventListener('click', () => {
         addRoom();
+        childrenSelectsEvent();
     });
-
-    const childrenSelect = document.querySelector('select[name=children]');
-    childrenSelect.addEventListener('change', () => {
-        const totalChildren = childrenSelect.value;
-        showAgeSelect(totalChildren);
-    });
+    childrenSelectsEvent();
 });
 
 window.addEventListener('load', () => {
@@ -84,18 +80,29 @@ function addRoom () {
         roomNumEl.firstChild.remove();
         const numberNode = document.createTextNode(totalRoomElements + 1);
         roomNumEl.appendChild(numberNode);
-        console.log();
         roomElement.appendChild(clone);
-        console.log(roomElement.childElementCount);
     }
     // });
 }
 
-function showAgeSelect (totalChildren) {
+function showAgeSelect (totalChildren, parentElement) {
+    if (parentElement.hasChildNodes()) {
+        const childrenElements = [...parentElement.children];
+        childrenElements.forEach(childElement => childElement.remove());
+    }
     for (let i = 0; i < totalChildren; i++) {
         const childAgeTemplate = document.querySelector('#child-age');
         const clone = document.importNode(childAgeTemplate.content, true);
-        const parent = childAgeTemplate.previousElementSibling;
-        parent.appendChild(clone);
+        parentElement.appendChild(clone);
     }
+}
+
+function childrenSelectsEvent () {
+    const childrenSelect = [...document.querySelectorAll('select[name=children]')];
+    childrenSelect.forEach(child => {
+        child.addEventListener('change', () => {
+            const totalChildren = child.value;
+            showAgeSelect(totalChildren, child.nextElementSibling);
+        });
+    });
 }
