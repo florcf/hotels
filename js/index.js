@@ -80,9 +80,37 @@ function addRoom () {
         roomNumEl.firstChild.remove();
         const numberNode = document.createTextNode(totalRoomElements + 1);
         roomNumEl.appendChild(numberNode);
+        createDeleteRoomElement(clone);
+        deleteRoomEvent(clone.firstElementChild);
         roomElement.appendChild(clone);
     }
     // });
+}
+
+function reassignRoomNumber () {
+    const roomElements = document.getElementById('total-rooms');
+    const rooms = [...roomElements.children];
+    for (let i = 1; i < rooms.length; i++) {
+        const roomNumElement = rooms[i].firstElementChild.nextElementSibling.firstElementChild;
+        roomNumElement.firstChild.remove();
+        const number = i + 1;
+        const numberNode = document.createTextNode(number);
+        roomNumElement.appendChild(numberNode);
+    }
+}
+
+function createDeleteRoomElement (parentElement) {
+    const closeBtn = document.createElement('h4');
+    const closeElement = document.createTextNode('x');
+    closeBtn.appendChild(closeElement);
+    parentElement.insertBefore(closeBtn, parentElement.firstElementChild);
+}
+
+function deleteRoomEvent (element) {
+    element.addEventListener('click', () => {
+        element.parentElement.remove();
+        reassignRoomNumber();
+    });
 }
 
 function showAgeSelect (totalChildren, parentElement) {
