@@ -8,6 +8,13 @@ $(function () {
     });
 });
 
+$('#room-input').on('shown.bs.popover', function () {
+    const btn = document.getElementById('add-room');
+    btn.addEventListener('click', () => {
+        addRoom();
+    });
+});
+
 window.addEventListener('load', () => {
     setDate();
     createOptionsNights();
@@ -57,4 +64,23 @@ function createRoomElement () {
         // Buscar otra manera de añadir habitaciones
         // porque el elemento template no está soportado.
     }
+}
+
+function addRoom () {
+    // const btn = document.getElementById('add-room');
+    // btn.addEventListener('click', () => {
+    const roomElement = document.getElementById('total-rooms');
+    const totalRoomElements = roomElement.childElementCount;
+    if (totalRoomElements < 4) {
+        const roomTemplate = document.querySelector('#room');
+        const clone = document.importNode(roomTemplate.content.firstElementChild.firstElementChild, true);
+        const roomNumEl = clone.firstElementChild.firstElementChild;
+        roomNumEl.firstChild.remove();
+        const numberNode = document.createTextNode(totalRoomElements + 1);
+        roomNumEl.appendChild(numberNode);
+        console.log();
+        roomElement.appendChild(clone);
+        console.log(roomElement.childElementCount);
+    }
+    // });
 }
