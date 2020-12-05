@@ -17,7 +17,7 @@
         <label for="date">Check In Date</label>
         <input type="date" name="date">
         <label for="nights">Nights</label>
-        <select name="nights" id="nights-select"></select>
+        <input type="text" name="nights" id="nights-select" placeholder="0 Nights" data-toggle="popover" >
         <label for="rooms">Rooms & Guests</label>
         <input type="text" name="rooms" id="room-input" placeholder="0 rooms & 0 guests" data-toggle="popover">
         <input type="button" id="search-btn" value="Search">
@@ -28,14 +28,14 @@
             <div>
                 <h3><span>1</span> Room</h3>
                 <label for="adults">Adults</label>
-                <select name="adults">
+                <select name="adults" class="custom-select">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
                 </select>
                 <label for="children">Children</label>
-                <select name="children">
+                <select name="children" class="custom-select">
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -43,7 +43,7 @@
                 </select>
                 <div id="total-child-age"></div>
                 <template id="child-age">
-                    <select name="age">
+                    <select name="age" class="custom-select">
                         <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>

@@ -1,3 +1,9 @@
+window.addEventListener('load', () => {
+    setDate();
+});
+
+const formElements = [...document.forms[0].children];
+
 $(function () {
     $('#room-input').popover({
         container: 'form',
@@ -6,23 +12,36 @@ $(function () {
         content: createRoomElement,
         placement: 'bottom'
     });
-});
 
-$('#room-input').on('shown.bs.popover', function () {
-    const addRoomBtn = document.getElementById('add-room');
-    addRoomBtn.addEventListener('click', () => {
-        addRoom();
+    $('#room-input').on('shown.bs.popover', function () {
+        const addRoomBtn = document.getElementById('add-room');
+        addRoomBtn.addEventListener('click', () => {
+            addRoom();
+            childrenSelectsEvent();
+        });
         childrenSelectsEvent();
     });
-    childrenSelectsEvent();
-});
 
-window.addEventListener('load', () => {
-    setDate();
-    createOptionsNights();
-});
+    $('#nights-select').popover({
+        container: 'form',
+        html: true,
+        content: createOptionsNights,
+        placement: 'bottom'
+    });
 
-const formElements = [...document.forms[0].children];
+    $('#nights-select').on('shown.bs.popover', function () {
+        const nightOptionsElements = [...document.getElementById('nightOptions').children];
+        nightOptionsElements.forEach(element => {
+            const classValue = element.classList.value;
+            if (classValue === 'enabledOption') {
+                element.addEventListener('click', () => {
+                    formElements[5].value = element.firstChild.nodeValue;
+                    $('#nights-select').popover('hide');
+                });
+            }
+        });
+    });
+});
 
 function setDate () {
     const dateInput = formElements[3];
@@ -37,16 +56,33 @@ function setDate () {
 }
 
 function createOptionsNights () {
-    const nightSelect = formElements[5];
+    const nightsOptions = document.createElement('div');
+    nightsOptions.id = 'nightOptions';
     const maxNights = 14;
+    const popularDurations = [4, 7, 10, 14];
+    createOptionsHeader('POPULAR DURATIONS', nightsOptions);
+    const dailyOptionsTitle = createOptionsHeader('DAILY', nightsOptions);
+
     for (let i = 1; i <= maxNights; i++) {
         const option = document.createElement('option');
+        option.className = 'enabledOption';
         const value = (i === 1) ? `${i} Night` : `${i} Nights`;
-        option.value = value;
+        option.value = i;
         const text = document.createTextNode(value);
         option.appendChild(text);
-        nightSelect.appendChild(option);
+        nightsOptions.appendChild(option);
+        if (popularDurations.includes(i)) nightsOptions.insertBefore(option, dailyOptionsTitle);
     }
+    return nightsOptions;
+}
+
+function createOptionsHeader (title, parent) {
+    const element = document.createElement('option');
+    element.disabled = true;
+    const titleText = document.createTextNode(title);
+    element.appendChild(titleText);
+    parent.appendChild(element);
+    return element;
 }
 
 function createRoomsContainer () {
@@ -56,21 +92,14 @@ function createRoomsContainer () {
 }
 
 function createRoomElement () {
-    if ('content' in document.createElement('template')) {
-        const newRoomElement = createRoomsContainer();
-        const roomTemplate = document.querySelector('#room');
-        const clone = document.importNode(roomTemplate.content, true);
-        newRoomElement.appendChild(clone);
-        return newRoomElement;
-    } else {
-        // Buscar otra manera de añadir habitaciones
-        // porque el elemento template no está soportado.
-    }
+    const newRoomElement = createRoomsContainer();
+    const roomTemplate = document.querySelector('#room');
+    const clone = document.importNode(roomTemplate.content, true);
+    newRoomElement.appendChild(clone);
+    return newRoomElement;
 }
 
 function addRoom () {
-    // const btn = document.getElementById('add-room');
-    // btn.addEventListener('click', () => {
     const roomElement = document.getElementById('total-rooms');
     const totalRoomElements = roomElement.childElementCount;
     if (totalRoomElements < 4) {
@@ -84,7 +113,6 @@ function addRoom () {
         deleteRoomEvent(clone.firstElementChild);
         roomElement.appendChild(clone);
     }
-    // });
 }
 
 function reassignRoomNumber () {
