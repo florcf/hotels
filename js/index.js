@@ -9,9 +9,15 @@ $(function () {
 });
 
 $('#room-input').on('shown.bs.popover', function () {
-    const btn = document.getElementById('add-room');
-    btn.addEventListener('click', () => {
+    const addRoomBtn = document.getElementById('add-room');
+    addRoomBtn.addEventListener('click', () => {
         addRoom();
+    });
+
+    const childrenSelect = document.querySelector('select[name=children]');
+    childrenSelect.addEventListener('change', () => {
+        const totalChildren = childrenSelect.value;
+        showAgeSelect(totalChildren);
     });
 });
 
@@ -83,4 +89,13 @@ function addRoom () {
         console.log(roomElement.childElementCount);
     }
     // });
+}
+
+function showAgeSelect (totalChildren) {
+    for (let i = 0; i < totalChildren; i++) {
+        const childAgeTemplate = document.querySelector('#child-age');
+        const clone = document.importNode(childAgeTemplate.content, true);
+        const parent = childAgeTemplate.previousElementSibling;
+        parent.appendChild(clone);
+    }
 }
