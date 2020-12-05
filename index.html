@@ -14,13 +14,13 @@
     <form action="">
         <label for="destination">Destination or Hotel Name</label>
         <input type="text" name="destination" id="" placeholder="Destination, resort or hotel?">
-        <label for="date">Check-in Date</label>
+        <label for="date">Check In Date</label>
         <input type="date" name="date">
         <label for="nights">Nights</label>
         <select name="nights" id="nights-select"></select>
         <label for="rooms">Rooms & Guests</label>
-        <input type="text" name="rooms" id="room-input" data-toggle="popover">
-        <input type="button" value="Search">
+        <input type="text" name="rooms" id="room-input" placeholder="0 rooms & 0 guests" data-toggle="popover">
+        <input type="button" id="search-btn" value="Search">
     </form>
 
     <template id="room">
@@ -62,9 +62,13 @@
             </div>
         </div>
 
-        <div id="add-room">
-            <p>ADD ROOM</p>
+        <div>
+            <div id="add-room">
+                <h6>ADD ROOM</h6>
+            </div>
+            <p>DONE</p>
         </div>
+        
     </template>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

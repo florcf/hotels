@@ -134,3 +134,25 @@ function childrenSelectsEvent () {
         });
     });
 }
+
+const consoleLog = (name, value) => console.log(`%c${name}: %c${value}`, 'color: #FF9671; font-size: 1rem; font-weight: bold', 'font-size: 1rem;');
+
+const inputValue = (selector) => document.querySelector(selector).value;
+
+const searchBtn = document.getElementById('search-btn');
+searchBtn.addEventListener('click', () => {
+    console.clear();
+    console.log('%cHOTEL RESERVATION', 'color: #00B39B; font-size: 2rem; font-weight: bold');
+
+    const destination = inputValue('input[name="destination"]');
+    consoleLog('Destination', destination);
+
+    const date = inputValue('input[type="date"]');
+    consoleLog('Check In Date', date);
+
+    const selectedNights = inputValue('#nights-select');
+    const number = selectedNights.split(' ')[0];
+    consoleLog('Nights', number);
+
+    console.log('%cRooms:', 'color: #FF9671; font-size: 1rem; font-weight: bold');
+});
