@@ -1,3 +1,13 @@
+$(function () {
+    $('#room-input').popover({
+        container: 'form',
+        html: true,
+        // sanitize: false,
+        content: createRoomElement,
+        placement: 'bottom'
+    });
+});
+
 window.addEventListener('load', () => {
     setDate();
     createOptionsNights();
@@ -30,23 +40,19 @@ function createOptionsNights () {
     }
 }
 
-const roomsInput = document.querySelector('input[name="rooms"');
-roomsInput.addEventListener('click', () => {
-    createRoomElement();
-});
+function createRoomsContainer () {
+    const div = document.createElement('div');
+    div.id = 'new-room';
+    return div;
+}
 
 function createRoomElement () {
     if ('content' in document.createElement('template')) {
-        const newRoomElement = document.querySelector('#new-room');
-        if (newRoomElement.hasChildNodes) {
-            const children = [...newRoomElement.children];
-            children.forEach(child => {
-                child.remove();
-            });
-        }
+        const newRoomElement = createRoomsContainer();
         const roomTemplate = document.querySelector('#room');
         const clone = document.importNode(roomTemplate.content, true);
         newRoomElement.appendChild(clone);
+        return newRoomElement;
     } else {
         // Buscar otra manera de añadir habitaciones
         // porque el elemento template no está soportado.
