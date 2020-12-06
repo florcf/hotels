@@ -3,6 +3,7 @@ window.addEventListener('load', () => {
 });
 
 const formElements = [...document.forms[0].children];
+let popoverContent;
 
 $(function () {
     $('#room-input').popover({
@@ -24,10 +25,13 @@ $(function () {
         const roomInput = formElements[3].lastElementChild;
         roomInput.addEventListener('click', () => {
             roomInput.value = setRoomsInputValue();
+            popoverContent = getPopoverContent();
         });
 
         const doneBtn = document.querySelector('#done');
         doneBtn.addEventListener('click', () => {
+            roomInput.value = setRoomsInputValue();
+            popoverContent = getPopoverContent();
             $('#room-input').popover('hide');
         });
     });
@@ -132,11 +136,15 @@ function createRoomsContainer () {
  * @return {*} El elemento que se añadirá al popover.
  */
 function createRoomElement () {
-    const newRoomElement = createRoomsContainer();
-    const roomTemplate = document.querySelector('#room');
-    const clone = document.importNode(roomTemplate.content, true);
-    newRoomElement.appendChild(clone);
-    return newRoomElement;
+    if (popoverContent === undefined) {
+        const newRoomElement = createRoomsContainer();
+        const roomTemplate = document.querySelector('#room');
+        const clone = document.importNode(roomTemplate.content, true);
+        newRoomElement.appendChild(clone);
+        return newRoomElement;
+    } else {
+        return popoverContent;
+    }
 }
 
 /**
@@ -257,6 +265,11 @@ function setRoomsInputValue () {
     return `${roomsInfo} & ${guestsInfo}`;
 }
 
+function getPopoverContent () {
+    const totalRooms = document.getElementById('new-room');
+    return totalRooms;
+}
+
 const consoleLog = (name, value) => console.log(`%c${name}: %c${value}`, 'color: #FF9671; font-size: 1rem; font-weight: bold', 'font-size: 1rem;');
 
 const inputValue = (selector) => document.querySelector(selector).value;
@@ -277,4 +290,33 @@ searchBtn.addEventListener('click', () => {
     consoleLog('Nights', number);
 
     console.log('%cRooms:', 'color: #FF9671; font-size: 1rem; font-weight: bold');
+    showRoomsInfo();
 });
+
+function showRoomsInfo () {
+    if (popoverContent !== undefined) {
+        const userChoice = popoverContent.firstElementChild;
+        const rooms = [...userChoice.children];
+        for (let i = 0; i < rooms.length; i++) {
+            const room = rooms[i];
+            const childrenElements = [...room.children];
+            if (i !== 0) childrenElements.shift(); // Remueve el elemento html que elimina las habitaciones.
+            const roomNumber = i + 1;
+            console.log(`%c\tGuests Room Number ${roomNumber}:`, 'color: #00B39B; font-size: 1rem; font-weight: bold');
+            const adults = childrenElements[2].value;
+            console.log(`%c\t\tAdults: %c${adults}.`, 'color: #2C7CF2; font-size: 1rem; font-weight: bold', 'font-size: 1rem;');
+            const children = childrenElements[4].value;
+            console.log(`%c\t\tChildren: %c${children}.`, 'color: #2C7CF2; font-size: 1rem; font-weight: bold', 'font-size: 1rem;');
+            const ageSelectElements = [...childrenElements[5].children];
+            if (ageSelectElements.length > 0) {
+                let ages = 'Ages: ';
+                ageSelectElements.forEach(element => {
+                    ages += `${element.value} years old. `;
+                });
+                console.log(`%c\t\t\t${ages}`, 'font-size: 1rem;');
+            }
+        }
+    } else {
+        console.log('%c\tThe user has not specified any info about rooms or guests.', 'font-size: 1rem;');
+    }
+}
