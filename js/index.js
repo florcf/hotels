@@ -21,9 +21,14 @@ $(function () {
         });
         childrenSelectsEvent();
 
-        const roomInput = formElements[7];
+        const roomInput = formElements[3].lastElementChild;
         roomInput.addEventListener('click', () => {
             roomInput.value = setRoomsInputValue();
+        });
+
+        const doneBtn = document.querySelector('#done');
+        doneBtn.addEventListener('click', () => {
+            $('#room-input').popover('hide');
         });
     });
 
@@ -40,7 +45,7 @@ $(function () {
             const classValue = element.classList.value;
             if (classValue === 'enabledOption') {
                 element.addEventListener('click', () => {
-                    formElements[5].value = element.firstChild.nodeValue;
+                    formElements[2].lastElementChild.value = element.firstChild.nodeValue;
                     $('#nights-select').popover('hide');
                 });
             }
@@ -49,7 +54,7 @@ $(function () {
 });
 
 function setDate () {
-    const dateInput = formElements[3];
+    const dateInput = formElements[1].lastElementChild;
     const date = new Date();
     const day = date.getDate();
     const dayFormat = (day < 10) ? `0${day}` : day;

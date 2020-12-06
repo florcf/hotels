@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Raleway:wght@500&display=swap');
+
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+header {
+    height: 100%;
+    background-image: url(../img/italy.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    filter: saturate(0.7);
+    display: flex;
+    flex-direction: column;
+}
+
+nav {
+    flex-basis: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+i {
+    margin-right: 1rem;
+}
+
+#title {
+    width: 400px;
+}
+
+h1 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 3rem;
+}
+
+#box {
+    align-self: center;
+    flex-basis: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#tabs {
+    display: flex;
+}
+
+.option {
+    background-color: #fff;
+    margin-right: 10px;
+    padding: 5px 20px;
+    border-radius: 5px 5px 0 0;
+    display: flex;
+    align-items: center;
+}
+
+.not-selected {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.5)
+}
+
+.content {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 0 5px 5px;
+}
+
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: block;
+}
+
+form {
+    display: flex;
+}
+
+input[name="destination"] {
+    width: 300px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-right: 15px;
+    margin-bottom: 0;
+}
+
+option:enabled, #add-room, #done {
+    cursor: pointer;
+}
+
