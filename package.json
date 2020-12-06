@@ -6,7 +6,8 @@
   "scripts": {
     "install": "npm install --save-dev eslint jsdoc",
     "lint": "eslint .",
-    "lintfix": "eslint --fix ."
+    "lintfix": "eslint --fix .",
+    "jsdoc": "jsdoc ./js/index.js"
   },
   "repository": {
     "type": "git",
