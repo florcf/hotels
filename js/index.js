@@ -20,6 +20,11 @@ $(function () {
             childrenSelectsEvent();
         });
         childrenSelectsEvent();
+
+        const roomInput = formElements[7];
+        roomInput.addEventListener('click', () => {
+            roomInput.value = setRoomsInputValue();
+        });
     });
 
     $('#nights-select').popover({
@@ -161,6 +166,20 @@ function childrenSelectsEvent () {
             showAgeSelect(totalChildren, child.nextElementSibling);
         });
     });
+}
+
+function setRoomsInputValue () {
+    const totalRooms = document.getElementById('total-rooms');
+    const rooms = [...totalRooms.children];
+    const roomsNumber = rooms.length;
+    let guests = 0;
+    const adults = document.querySelectorAll('select[name="adults"]');
+    adults.forEach(adult => { guests += parseInt(adult.value); });
+    const children = document.querySelectorAll('select[name="children"]');
+    children.forEach(child => { guests += parseInt(child.value); });
+    const roomsInfo = (roomsNumber === 1) ? `${roomsNumber} room` : `${roomsNumber} rooms`;
+    const guestsInfo = (guests === 1) ? `${guests} guest` : `${guests} guests`;
+    return `${roomsInfo} & ${guestsInfo}`;
 }
 
 const consoleLog = (name, value) => console.log(`%c${name}: %c${value}`, 'color: #FF9671; font-size: 1rem; font-weight: bold', 'font-size: 1rem;');
