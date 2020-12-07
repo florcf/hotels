@@ -39,20 +39,20 @@
 
                 <div class="visible content" id="hotels">
                     <form action="">
-                        <div class="form-group">
+                        <div class="form-group d-flex flex-column mr-1 mb-0">
                             <label for="destination">Destination or Hotel Name</label>
                             <input type="text" name="destination" id="" placeholder="Destination, resort or hotel?">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group d-flex flex-column mr-1 mb-0">
                             <label for="date">Check In Date</label>
                             <input type="date" name="date">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group d-flex flex-column mr-1 mb-0">
                             <label for="nights">Nights</label>
                             <input type="text" name="nights" id="nights-select" placeholder="0 nights"
                                 data-toggle="popover">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group d-flex flex-column mr-1 mb-0">
                             <label for="rooms">Rooms & Guests</label>
                             <input type="text" name="rooms" id="room-input" placeholder="0 rooms & 0 guests"
                                 data-toggle="popover">
@@ -70,8 +70,8 @@
 
 
     <template id="room">
-        <div id="total-rooms">
-            <div>
+        <div id="total-rooms" class="d-flex">
+            <div class="mr-2 pr-2 border-right border-dark">
                 <h3><span>1</span> Room</h3>
                 <label for="adults">Adults</label>
                 <select name="adults" class="custom-select">
@@ -89,7 +89,7 @@
                 </select>
                 <div id="total-child-age"></div>
                 <template id="child-age">
-                    <select name="age" class="custom-select">
+                    <select name="age" class="custom-select border-danger mt-3">
                         <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -108,11 +108,11 @@
             </div>
         </div>
 
-        <div>
+        <div class="d-flex flex-column justify-content-between">
             <div id="add-room">
                 <h6>ADD ROOM</h6>
             </div>
-            <p id="done">DONE</p>
+            <p id="done" class="align-self-end font-weight-bold">DONE</p>
         </div>
 
     </template>

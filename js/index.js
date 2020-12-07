@@ -127,6 +127,7 @@ function createOptionsHeader (title, parent) {
 function createRoomsContainer () {
     const div = document.createElement('div');
     div.id = 'new-room';
+    div.className = 'd-flex';
     return div;
 }
 
@@ -193,6 +194,7 @@ function reassignRoomNumber () {
  */
 function createDeleteRoomElement (parentElement) {
     const closeBtn = document.createElement('h4');
+    closeBtn.className = 'delete-room text-right';
     const closeElement = document.createTextNode('x');
     closeBtn.appendChild(closeElement);
     parentElement.insertBefore(closeBtn, parentElement.firstElementChild);

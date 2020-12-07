@@ -85,17 +85,36 @@ form {
 }
 
 input[name="destination"] {
-    width: 300px;
+    width: 250px;
 }
 
-.form-group {
-    display: flex;
-    flex-direction: column;
-    margin-right: 15px;
-    margin-bottom: 0;
-}
-
-option:enabled, #add-room, #done {
+option:enabled, #add-room, #done, .delete-room, .option {
     cursor: pointer;
 }
 
+#total-rooms > div:first-child {
+    padding-top: 35px;
+}
+
+h3 {
+    color: #b4845c;
+}
+
+#search-btn {
+    background-color: #1d1d1d;
+    color: #fff;
+    border-radius: 5px;
+    border: none;
+    padding: 0 10px;
+}
+
+#add-room {
+    background-color: #b0bec9;
+    color: #fff;
+    border-radius: 3px;
+    padding: 1rem;
+}
+
+.popover{
+    max-width: 100%; /* Max Width of the popover (depending on the container!) */
+}
